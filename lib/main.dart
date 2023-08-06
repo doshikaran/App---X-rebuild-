@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:twitter_clone/features/auth/screen/login_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:twitter_clone/features/auth/screen/login_screen.dart';
 import 'package:twitter_clone/features/auth/screen/signup_screen.dart';
 import 'package:twitter_clone/theme/theme.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
