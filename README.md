@@ -1,16 +1,10 @@
-# twitter_clone
+# X Rebuild App using Flutter and Appwrite
 
-A new Flutter project.
+This is a Flutter app called "X Rebuild" that utilizes the Appwrite backend service. The app is inspired by the video [here](https://youtube.com/shorts/BzYDxLH-tdw?feature=share). 
+## Introduction
 
-## Getting Started
+X Rebuild is a sample app built using Flutter, a popular cross-platform mobile application framework, and Appwrite, an open-source backend server that simplifies backend development tasks. This app aims to showcase how to interact with Appwrite services, including authentication, database, and storage, within a Flutter app.
 
-This project is a starting point for a Flutter application.
+## Demo
+Demo coming soon as soon as the app is done.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
