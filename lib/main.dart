@@ -20,7 +20,7 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'X Rebuild',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.theme,
         home: ref.watch(currentUserAccountProvider).when(
