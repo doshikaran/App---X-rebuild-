@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:twitter_clone/common/custom_button.dart';
 import 'package:twitter_clone/common/loading_page.dart';
-import 'package:twitter_clone/theme/pallete.dart';
-
-import '../../auth/controller/auth_controller.dart';
+import 'package:twitter_clone/features/auth/controller/auth_controller.dart';
+import 'package:twitter_clone/theme/theme.dart';
 
 class CreateTweetScreen extends ConsumerStatefulWidget {
-  static route() => MaterialPageRoute(
-        builder: (context) => const CreateTweetScreen(),
-      );
+  static route() =>
+      MaterialPageRoute(builder: (context) => const CreateTweetScreen());
   const CreateTweetScreen({super.key});
 
   @override
@@ -20,11 +18,14 @@ class CreateTweetScreen extends ConsumerStatefulWidget {
 class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
   @override
   Widget build(BuildContext context) {
-    final currentUser = ref.watch(currentUserDetailsProvider).value;
+    final currenUser = ref.watch(currentUserDetailsProvider).value;
 
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(icon: const Icon(Icons.cancel), onPressed: () {}),
+        leading: IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.close),
+        ),
         actions: [
           CustomButton(
               onTap: () {},
@@ -33,24 +34,21 @@ class _CreateTweetScreenState extends ConsumerState<CreateTweetScreen> {
               textColor: Pallete.whiteColor)
         ],
       ),
-      body: currentUser == null
+      body: currenUser == null
           ? const Loader()
           : SafeArea(
               child: SingleChildScrollView(
-                child: Column(
+              child: Column(children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(currentUser.profilePic),
-                          radius: 30,
-                        ),
-                      ],
+                    CircleAvatar(
+                      backgroundColor: Pallete.blueColor,
+                      backgroundImage: NetworkImage(currenUser.profilePic),
                     )
                   ],
-                ),
-              ),
-            ),
+                )
+              ]),
+            )),
     );
   }
 }

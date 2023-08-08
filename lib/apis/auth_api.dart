@@ -2,8 +2,6 @@ import 'package:appwrite/appwrite.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:twitter_clone/core/core.dart';
-import 'package:twitter_clone/core/providers.dart';
-import 'package:twitter_clone/core/type_defs.dart';
 import 'package:appwrite/models.dart' as model;
 
 final authAPIProvider = Provider((ref) {
@@ -21,7 +19,7 @@ abstract class IAuthAPI {
     required String password,
   });
   Future<model.Account?> currentUserAccount();
-  // FutureEitherVoid logout();
+  FutureEitherVoid logout();
 }
 
 class AuthAPI implements IAuthAPI {
@@ -32,9 +30,9 @@ class AuthAPI implements IAuthAPI {
   Future<model.Account?> currentUserAccount() async {
     try {
       return await _account.get();
-    } on AppwriteException catch (error) {
+    } on AppwriteException catch (e) {
       return null;
-    } catch (error) {
+    } catch (e) {
       return null;
     }
   }
@@ -51,13 +49,13 @@ class AuthAPI implements IAuthAPI {
         password: password,
       );
       return right(account);
-    } on AppwriteException catch (e, stackTrace) {
+    } on AppwriteException catch (e) {
       return left(
-        Failure(e.message ?? 'Some unexpected error occurred', stackTrace),
+        Failure(e.message ?? 'Some unexpected error occurred'),
       );
-    } catch (e, stackTrace) {
+    } catch (e) {
       return left(
-        Failure(e.toString(), stackTrace),
+        Failure(e.toString()),
       );
     }
   }
@@ -73,13 +71,31 @@ class AuthAPI implements IAuthAPI {
         password: password,
       );
       return right(session);
-    } on AppwriteException catch (e, stackTrace) {
+    } on AppwriteException catch (e) {
       return left(
-        Failure(e.message ?? 'Some unexpected error occurred', stackTrace),
+        Failure(e.message ?? 'Some unexpected error occurred'),
       );
-    } catch (e, stackTrace) {
+    } catch (e) {
       return left(
-        Failure(e.toString(), stackTrace),
+        Failure(e.toString()),
+      );
+    }
+  }
+
+  @override
+  FutureEitherVoid logout() async {
+    try {
+      await _account.deleteSession(
+        sessionId: 'current',
+      );
+      return right(null);
+    } on AppwriteException catch (e) {
+      return left(
+        Failure(e.message ?? 'Some unexpected error occurred'),
+      );
+    } catch (e) {
+      return left(
+        Failure(e.toString()),
       );
     }
   }

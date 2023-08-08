@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:twitter_clone/constants/appwrite_constants.dart';
 import 'package:twitter_clone/core/core.dart';
-import 'package:twitter_clone/core/providers.dart';
 import 'package:twitter_clone/models/user_model.dart';
 
 final userAPIProvider = Provider((ref) {
@@ -29,10 +28,10 @@ class UserAPI implements IUserAPI {
           documentId: userModel.uid,
           data: userModel.toMap());
       return right(null);
-    } on AppwriteException catch (e, st) {
-      return left(Failure(e.message ?? 'Some unexpected error occurred', st));
-    } catch (e, st) {
-      return left(Failure(e.toString(), st));
+    } on AppwriteException catch (e) {
+      return left(Failure(e.message ?? 'Some unexpected error occurred'));
+    } catch (e) {
+      return left(Failure(e.toString()));
     }
   }
 
